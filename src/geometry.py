@@ -12,7 +12,7 @@ class Line(object):
         canvas.create_line(self.p1.x, self.p1.y, self.p2.x, self.p2.y, fill=fill_color, width=2)
 
 class Cell(object):
-    def __init__(self, topleft_x, topleft_y, bottomright_x, bottomright_y, window):
+    def __init__(self, topleft_x, topleft_y, bottomright_x, bottomright_y, window=None):
         self._window = window
 
         self._topleft = Point(topleft_x, topleft_y)
@@ -34,19 +34,23 @@ class Cell(object):
         self.has_right = True
         self.has_bottom = True
 
+    def _draw_line(self, line, fill_color):
+        if self._window:
+            self._window.draw_line(line, fill_color)
+
     def draw(self, fill_color):
         if self.has_top:
-            self._window.draw_line(self._top, fill_color)
+            self._draw_line(self._top, fill_color)
         if self.has_left:
-            self._window.draw_line(self._left, fill_color)
+            self._draw_line(self._left, fill_color)
         if self.has_right:
-            self._window.draw_line(self._right, fill_color)
+            self._draw_line(self._right, fill_color)
         if self.has_bottom:
-            self._window.draw_line(self._bottom, fill_color)
+            self._draw_line(self._bottom, fill_color)
 
     def draw_move(self, to_cell, undo=False):
         centerline = Line(self.center, to_cell.center)
         if undo:
-            self._window.draw_line(centerline, "gray")
+            self._draw_line(centerline, "gray")
         else:
-            self._window.draw_line(centerline, "red")
+            self._draw_line(centerline, "red")
