@@ -10,3 +10,32 @@ class Line(object):
 
     def draw(self, canvas, fill_color):
         canvas.create_line(self.p1.x, self.p1.y, self.p2.x, self.p2.y, fill=fill_color, width=2)
+
+class Cell(object):
+    def __init__(self, topleft_x, topleft_y, bottomright_x, bottomright_y, window):
+        self._window = window
+
+        self._topleft = Point(topleft_x, topleft_y)
+        self._bottomleft = Point(topleft_x, bottomright_y)
+        self._topright = Point(bottomright_x, topleft_y)
+        self._bottomright = Point(bottomright_x, bottomright_y)
+
+        self._top = Line(self._topleft, self._topright)
+        self._left = Line(self._topleft, self._bottomleft)
+        self._right = Line(self._topright, self._bottomright)
+        self._bottom = Line(self._bottomleft, self._bottomright)
+
+        self.has_top = True
+        self.has_left = True
+        self.has_right = True
+        self.has_bottom = True
+
+    def draw(self, fill_color):
+        if self.has_top:
+            self._window.draw_line(self._top, fill_color)
+        if self.has_left:
+            self._window.draw_line(self._left, fill_color)
+        if self.has_right:
+            self._window.draw_line(self._right, fill_color)
+        if self.has_bottom:
+            self._window.draw_line(self._bottom, fill_color)
