@@ -20,6 +20,10 @@ class Cell(object):
         self._topright = Point(bottomright_x, topleft_y)
         self._bottomright = Point(bottomright_x, bottomright_y)
 
+        med_x = (topleft_x + bottomright_x) // 2
+        med_y = (topleft_y + bottomright_y) // 2
+        self.center = Point(med_x, med_y)
+
         self._top = Line(self._topleft, self._topright)
         self._left = Line(self._topleft, self._bottomleft)
         self._right = Line(self._topright, self._bottomright)
@@ -39,3 +43,10 @@ class Cell(object):
             self._window.draw_line(self._right, fill_color)
         if self.has_bottom:
             self._window.draw_line(self._bottom, fill_color)
+
+    def draw_move(self, to_cell, undo=False):
+        centerline = Line(self.center, to_cell.center)
+        if undo:
+            self._window.draw_line(centerline, "gray")
+        else:
+            self._window.draw_line(centerline, "red")
