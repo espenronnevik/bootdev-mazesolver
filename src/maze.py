@@ -12,6 +12,7 @@ class Maze(object):
         self._cell_size_y = cell_size_y
         self._window = window
         self._create_cells()
+        self._break_entrance_and_exit()
 
     def _create_cells(self):
         self._cells = []
@@ -39,3 +40,11 @@ class Maze(object):
         if self._window:
             self._window.redraw()
             sleep(0.05)
+
+    def _break_entrance_and_exit(self):
+        begincell = self._cells[0][0]
+        begincell.has_left = False
+        begincell.draw("black")
+        endcell = self._cells[-1][-1]
+        endcell.has_right = False
+        endcell.draw("black")
