@@ -21,5 +21,7 @@ class Window(object):
         def close(self):
             self._running = False
 
-        def draw_line(self, line, fill_color):
+        def draw_line(self, line, fill_color=None):
+            if fill_color is None:
+                fill_color = self._canvas["background"]
             line.draw(self._canvas, fill_color)

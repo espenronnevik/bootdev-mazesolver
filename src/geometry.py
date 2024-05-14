@@ -34,19 +34,17 @@ class Cell(object):
         self.has_right = True
         self.has_bottom = True
 
-    def _draw_line(self, line, fill_color):
+    def _draw_line(self, line, fill_color, add=True):
         if self._window:
+            if not add:
+                fill_color = None
             self._window.draw_line(line, fill_color)
 
     def draw(self, fill_color):
-        if self.has_top:
-            self._draw_line(self._top, fill_color)
-        if self.has_left:
-            self._draw_line(self._left, fill_color)
-        if self.has_right:
-            self._draw_line(self._right, fill_color)
-        if self.has_bottom:
-            self._draw_line(self._bottom, fill_color)
+        self._draw_line(self._top, fill_color, self.has_top)
+        self._draw_line(self._left, fill_color, self.has_left)
+        self._draw_line(self._right, fill_color, self.has_right)
+        self._draw_line(self._bottom, fill_color, self.has_bottom)
 
     def draw_move(self, to_cell, undo=False):
         centerline = Line(self.center, to_cell.center)
