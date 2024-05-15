@@ -28,18 +28,15 @@ class Maze(object):
             for j in range(self._num_rows):
                 x1 = self._x1 + (self._cell_size_x * j)
                 x2 = x1 + self._cell_size_x
-                self._cells[i].append(Cell(x1, y1, x2, y2, self._window))
-                self._draw_cell(i, j)
+                cell = Cell(x1, y1, x2, y2, self._window)
+                self._cells[i].append(cell)
+                cell.draw("black")
 
-    def _draw_cell(self, i, j):
-        # Guide states that this method should calculate x/y position, but the Cell knows how to
-        # draw itself based on coordinates set during creation, which I think should be sufficient.
-        # Just call the cell's draw() method for now.
-        #
-        # Only draw/animate if the Maze has a window
+    def _draw_cells(self, *cells):
         if self._window:
-            self._cells[i][j].draw("black")
-            self._animate()
+            for cell in cells:
+                cell.draw("black")
+                self._animate()
 
     def _animate(self):
         if self._window:
