@@ -6,8 +6,8 @@ def main():
     offset_y = 5
     num_cols = 20
     num_rows = 40
-    cellsize_x = 50
-    cellsize_y = 50
+    cellsize_x = 30
+    cellsize_y = 30
 
     winsize_x = (offset_x * 2) + (num_rows * cellsize_x)
     winsize_y = (offset_y * 2) + (num_cols * cellsize_y)

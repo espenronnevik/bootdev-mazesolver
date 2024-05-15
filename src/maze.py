@@ -19,6 +19,7 @@ class Maze(object):
         self._create_cells()
         self._break_entrance_and_exit()
         self._break_walls_r(0, 0)
+        print("Finished maze creation")
 
     def _create_cells(self):
         self._cells = []
@@ -42,7 +43,7 @@ class Maze(object):
     def _animate(self):
         if self._window:
             self._window.redraw()
-            sleep(0.05)
+            sleep(0.005)
 
     def _break_entrance_and_exit(self):
         begincell = self._cells[0][0]
