@@ -19,7 +19,6 @@ class Maze(object):
         self._create_cells()
         self._break_entrance_and_exit()
         self._break_walls_r(0, 0)
-        print("Finished maze creation")
         self._reset_cells_visited()
 
     def _create_cells(self):
@@ -103,3 +102,46 @@ class Maze(object):
         for col in self._cells:
             for cell in col:
                 cell.visited = False
+
+    def solve(self):
+        self._solve_r(0, 0)
+
+    def _valid_move(self, has_wall, col, row):
+        if not has_wall:
+            cell = self._valid_cell(col, row)
+            if cell is not None and not cell.visited:
+                return cell
+        return None
+
+    def _draw_move(self, fromcell, tocell, undo=False):
+        if self._window:
+            fromcell.draw_move(tocell, undo)
+            self._animate()
+
+    def _solve_r(self, col, row):
+        currentcell = self._cells[col][row]
+        currentcell.visited = True
+
+        # Success if we reached the exit cell
+        if currentcell == self._cells[-1][-1]:
+            return True
+
+        possible_moves = [[currentcell.has_top, col - 1, row],
+            [currentcell.has_bottom, col + 1, row],
+            [currentcell.has_left, col, row - 1],
+            [currentcell.has_right, col, row + 1]]
+
+        random.shuffle(possible_moves)
+        for next_move in possible_moves:
+            nextcell = self._valid_move(*next_move)
+
+            if nextcell is None:
+                continue
+
+            self._draw_move(currentcell, nextcell)
+            if self._solve_r(next_move[1], next_move[2]):
+                return True
+            else:
+                self._draw_move(currentcell, nextcell, True)
+
+        return False

@@ -14,6 +14,8 @@ def main():
 
     win = Window(winsize_x, winsize_y)
     maze = Maze(offset_x, offset_y, num_cols, num_rows, cellsize_x, cellsize_y, win)
+    maze.solve()
+
     win.wait_for_close()
 
 if __name__ == "__main__":
