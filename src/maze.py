@@ -1,9 +1,10 @@
+import random
 from time import sleep
 
 from geometry import Cell
 
 class Maze(object):
-    def __init__(self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, window=None):
+    def __init__(self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, window=None, seed=None):
         self._x1 = x1
         self._y1 = y1
         self._num_rows = num_rows
@@ -11,6 +12,10 @@ class Maze(object):
         self._cell_size_x = cell_size_x
         self._cell_size_y = cell_size_y
         self._window = window
+
+        if seed is not None:
+            random.seed(seed)
+
         self._create_cells()
         self._break_entrance_and_exit()
 
