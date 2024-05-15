@@ -34,6 +34,8 @@ class Cell(object):
         self.has_right = True
         self.has_bottom = True
 
+        self.visited = False
+
     def _draw_line(self, line, fill_color, add=True):
         if self._window:
             if not add:
