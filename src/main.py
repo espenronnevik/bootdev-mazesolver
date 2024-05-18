@@ -1,5 +1,6 @@
-from window import Window
 from maze import Maze
+from window import Window
+
 
 def main():
     offset_x = 5
@@ -17,6 +18,7 @@ def main():
     maze.solve()
 
     win.wait_for_close()
+
 
 if __name__ == "__main__":
     main()

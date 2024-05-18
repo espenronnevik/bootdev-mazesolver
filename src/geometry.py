@@ -3,6 +3,7 @@ class Point(object):
         self.x = x
         self.y = y
 
+
 class Line(object):
     def __init__(self, p1, p2):
         self.p1 = p1
@@ -10,6 +11,7 @@ class Line(object):
 
     def draw(self, canvas, fill_color):
         canvas.create_line(self.p1.x, self.p1.y, self.p2.x, self.p2.y, fill=fill_color, width=2)
+
 
 class Cell(object):
     def __init__(self, topleft_x, topleft_y, bottomright_x, bottomright_y, window=None):

@@ -3,6 +3,7 @@ from time import sleep
 
 from geometry import Cell
 
+
 class Maze(object):
     def __init__(self, x1, y1, num_cols, num_rows, cell_size_x, cell_size_y, window=None, seed=None):
         self._x1 = x1
@@ -127,9 +128,9 @@ class Maze(object):
             return True
 
         possible_moves = [[currentcell.has_top, col - 1, row],
-            [currentcell.has_bottom, col + 1, row],
-            [currentcell.has_left, col, row - 1],
-            [currentcell.has_right, col, row + 1]]
+                          [currentcell.has_bottom, col + 1, row],
+                          [currentcell.has_left, col, row - 1],
+                          [currentcell.has_right, col, row + 1]]
 
         random.shuffle(possible_moves)
         for next_move in possible_moves:

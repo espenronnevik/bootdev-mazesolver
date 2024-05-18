@@ -2,6 +2,7 @@ import unittest
 
 from maze import Maze
 
+
 class Tests(unittest.TestCase):
     def test_maze_create_cells(self):
         num_cols = 12
@@ -23,7 +24,7 @@ class Tests(unittest.TestCase):
         m1 = Maze(0, 0, num_cols, num_rows, 10, 10)
         for i in range(num_cols):
             count += len(m1._cells[i])
-        self.assertEqual(num_cols*num_rows, count)
+        self.assertEqual(num_cols * num_rows, count)
 
     def test_reset_visited(self):
         num_cols = 3
